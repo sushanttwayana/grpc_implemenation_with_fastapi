@@ -97,4 +97,15 @@ textcurl -X "POST" "http://127.0.0.1:8000/api/restaurants" -H "accept: applicati
 Stop: docker-compose dow
 ```
 
+## Output of Docker 
+
+<img width="1557" height="785" alt="image" src="https://github.com/user-attachments/assets/2cc2f314-9d48-4812-9a6a-1a346fedf767" />
+
+
+<img width="1571" height="820" alt="image" src="https://github.com/user-attachments/assets/ad8d57ed-c819-42d7-817b-4d80c56fde8c" />
+
+<img width="1574" height="367" alt="image" src="https://github.com/user-attachments/assets/08681b54-d68f-40c3-81be-40f5399aaee4" />
+
+
+
 
