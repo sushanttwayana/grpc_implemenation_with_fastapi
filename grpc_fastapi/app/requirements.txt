@@ -1,0 +1,7 @@
+fastapi 
+uvicorn 
+grpcio 
+grpcio-tools
+grpc-interceptor 
+python-dotenv 
+pydantic
