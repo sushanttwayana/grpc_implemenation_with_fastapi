@@ -55,37 +55,53 @@ Local and Dockerized setups for easy running and testing.
    Copy generated pb/ files to app/pb/.
    ```
 
-## How It Works
-MCP follows a client-server architecture:
+**Fix import in pb/*_grpc.py: Change import *_pb2 to import pb.*_pb2.** 
 
-- MCP Server - Exposes tools, resources, and capabilities
-- MCP Client - Connects AI models to servers
-- AI Model - Uses tools via MCP to complete tasks
-
-<img width="520" height="150" alt="image" src="https://github.com/user-attachments/assets/0be91307-4d1e-48cf-bd94-dc6c070bb72e" />
-
-## Use Cases
-
-- Personal Finance Management - Track expenses with AI
-- Conversational AI - Build chatbots with tool access
-- Data Analysis - Query databases through natural language
-- Automation - Create AI agents that interact with APIs
-- Content Generation - Generate animations or visualizations
-
-### Technologies Used
-
-- Python - Core language
-- FastMCP - Python MCP framework
-- LangGraph - Agent orchestration
-- SQLite - Database for expense tracker
-- Manim - Mathematical animations
-
-## Project Structure Explained
-Each folder contains a complete MCP implementation:
-
-- server.py or main.py - MCP server implementation
-- client.py - MCP client (if separate)
-- requirements.txt - Dependencies
-- README.md - Project-specific documentation
+**Copy generated pb/ files to app/pb/.**
 
 
+## Running Locally
+Open 4 terminals in the project root:
+
+1. Bakery: cd bakery && python main.py (listens on 50051)
+2. Bar: cd bar && python main.py (listens on 50052)
+3. Kitchen: cd kitchen && python main.py (listens on 50053)
+4. FastAPI: cd app && python main.py (runs on http://0.0.0.0:8000)
+
+Servers log "Starter..." on success.
+
+## Testing Locally
+ ```bash
+In a new terminal:
+textcurl -X "POST" "http://127.0.0.1:8000/api/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"drink\": \"coffee\", \"meal\": \"pasta\", \"dessert\": \"cookie\" }"
+
+Expected: {"order_id":"uuid","drink":"Delivery!","meal":"Delivery!","dessert":"Delivery!"}
+Test out-of-stock: Change to "beer", "pizza", "donut" → "out of stock" messages.
+Invalid input: Non-enum values → 422 error.
+```
+
+## Docker Setup and Running
+
+1. Ensure ports 8000, 50051-50053 are free (stop local servers).
+2. Create network: docker network create my-net
+3. Build and run: docker-compose up --build -d
+   
+   - Builds images and starts containers in background.
+   - Logs: docker-compose logs -f
+
+
+## Testing with Docker
+```bash
+Same curl as local:
+textcurl -X "POST" "http://127.0.0.1:8000/api/restaurants" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"drink\": \"coffee\", \"meal\": \"pasta\", \"dessert\": \"cookie\" }"
+Stop: docker-compose dow
+```
+
+## Output of Docker 
+
+<img width="1557" height="785" alt="image" src="https://github.com/user-attachments/assets/2cc2f314-9d48-4812-9a6a-1a346fedf767" />
+
+
+<img width="1571" height="820" alt="image" src="https://github.com/user-attachments/assets/ad8d57ed-c819-42d7-817b-4d80c56fde8c" />
+
+<img width="1574" height="367" alt="image" src="https://github.com/user-attachments/assets/08681b54-d68f-40c3-81be-40f5399aaee4" />
